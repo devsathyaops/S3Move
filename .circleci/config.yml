@@ -16,7 +16,7 @@ jobs:
       - run:
           name: Upload to S3
           command: |
-            aws s3 sync . s3://<bucket-name>/<folder-name> --delete
+            aws s3 sync . s3://githubreposupload/githubrepos --delete
             echo "Sync complete."
 
 workflows:
