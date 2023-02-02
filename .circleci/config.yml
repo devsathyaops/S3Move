@@ -1,0 +1,24 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.8
+
+    steps:
+      - checkout
+
+      - run:
+          name: Install dependencies
+          command: |
+            pip install awscli
+
+      - run:
+          name: Upload to S3
+          command: |
+            aws s3 sync . s3://githubreposupload/githubrepos --delete
+            echo "Sync complete."
+
+      - store_artifacts:
+          path: /tmp
+          destination: artifacts
