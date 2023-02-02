@@ -19,6 +19,10 @@ jobs:
             aws s3 sync . s3://githubreposupload/githubrepos --delete
             echo "Sync complete."
 
+      - store_artifacts:
+          path: /tmp
+          destination: artifacts
+
 workflows:
   version: 2
   build_and_deploy:
