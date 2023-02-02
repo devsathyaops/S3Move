@@ -16,13 +16,15 @@ jobs:
       - run:
           name: Upload to S3
           command: |
-            aws s3 sync . s3://githubreposupload/githubrepos --delete
+            aws s3 sync . s3://<bucket-name>/<folder-name> --delete
             echo "Sync complete."
 
-      - store_artifacts:
-          path: /tmp
-          destination: artifacts
-          
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build
+
 environment:
   AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY
   AWS_SECRET_ACCESS_KEY: $AWS_ACCESS_SECRET
